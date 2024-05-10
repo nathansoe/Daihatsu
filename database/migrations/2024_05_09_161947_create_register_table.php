@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('jenis_peserta');
             $table->integer('jumlah_hadir');
             $table->string('status');
+            $table->string('qrcode_id')
+            $table->string('link_qrcode');
             $table->timestamps();
         });
     }
