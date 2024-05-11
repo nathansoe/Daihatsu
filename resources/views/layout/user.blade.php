@@ -10,14 +10,13 @@
 </head>
 
 <body>
-    <x-sidebar/>
-    <div class="sm:ml-64 min-h-screen">
-        <div class="w-full px-5 flex items-center h-16 bg-gray-50 border-b-2 border-gray-200">
-            <p>@yield('sub_title', 'N/A')</p>
-        </div>
-        <div class="m-4 p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700">
-            @yield('main')
-        </div>
+    <div class="py-3">
+        <x-guest.header/>
+        <main class="px-4 lg:px-6 py-2.5 min-h-screen bg-gray-100">
+            <div class="container mx-auto">
+                @yield('main')
+            </div>
+        </main>
     </div>
 </body>
 

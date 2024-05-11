@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::get('/', [AuthenticatedSessionController::class, 'create'])
-                ->name('login');
+Route::get('/', function(){
+    return view('pages/guest/index');
+});
+
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 
 Route::get('/dashboard', function () {
     // return view('dashboard');
