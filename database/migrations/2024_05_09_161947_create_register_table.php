@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('register', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('nik');
-            $table->string('domisili');
-            $table->string('no_hp');
-            $table->string('email');
-            $table->string('jenis_peserta');
-            $table->integer('jumlah_hadir');
-            $table->string('status');
-            $table->string('qrcode_id')
-            $table->string('link_qrcode');
+            $table->string('nama')->nullable();
+            $table->string('nik')->nullable();
+            $table->string('domisili')->nullable();
+            $table->string('no_hp')->nullable();
+            $table->string('email')->nullable();
+            $table->string('jenis_peserta')->nullable();
+            $table->integer('jumlah_hadir')->nullable();
+            $table->string('status')->nullable();
+            $table->string('qrcode_id')->nullable();
+            $table->string('link_qrcode')->nullable();
             $table->timestamps();
         });
     }
