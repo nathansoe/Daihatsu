@@ -15,13 +15,17 @@ class SendEmail extends Mailable
     use Queueable, SerializesModels;
 
     public $subject;
+    public $pathImage;
+    public $qrcodeId;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($subject)
+    public function __construct($subject, $pathImage, $qrcodeId)
     {
         $this->subject= $subject; 
+        $this->pathImage= $pathImage;
+        $this->qrcodeId = $qrcodeId; 
     }
 
     /**
@@ -56,7 +60,9 @@ class SendEmail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        return [
+            Attachment::fromStorageDisk('local', $this->pathImage)->as($this->qrcodeId . '.png')
+        ];
     }
 
     // public function build() {
