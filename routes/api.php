@@ -12,6 +12,7 @@ Route::get('/hello', function () {
 
 
 Route::post('/register', [RegisterController::class, 'store']);
+Route::get('/cekRegister', [RegisterController::class, 'cekRegister']);
 Route::get('/all', [AdminController::class, 'allKehadiran']);
 Route::get('/hadir', [AdminController::class, 'hadir']);
 Route::get('/tidakHadir', [AdminController::class, 'tidakHadir']);

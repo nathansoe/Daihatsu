@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Mail;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -28,7 +29,6 @@ class RegisterController extends Controller
             'email'=> 'required',
             'jenis_peserta'=> 'required',
             'jumlah_hadir' => 'required',
-            'status' => 'required'
         ]);
 
         if($validator -> fails()){
@@ -43,8 +43,24 @@ class RegisterController extends Controller
                 'message' => 'Anda Sudah terdaftar!'
             ], 409);
         }
-
+        $status = 0;
         $createBarcode = $this->generateQrCode($request->nik);
+
+        $qr_image = 
+        [
+           'image' => url('storage/app/public/' . $createBarcode['link_file'])
+        ];
+        $messageHeader = 'Selamat datang di Daihatsu';
+        return $qr_image;
+        die();
+        Mail::to($request->email)->send(new SendEmail($messageHeader, $qr_image));
+
+        // storage_path($createBarcode['link_file']);
+
+   
+
+        return $createBarcode['link_file'];
+        die();
 
         $register = Register::create([
             'nama' => $request->nama,
@@ -54,14 +70,12 @@ class RegisterController extends Controller
             'email'=> $request->email,
             'jenis_peserta'=> $request->jenis_peserta,
             'jumlah_hadir' => $request->jumlah_hadir,
-            'status' => $request->status,
+            'status' => $status,
             'qrcode_id' => $createBarcode['nik'],
             'link_qrcode' => $createBarcode['link_file']
         ]);
 
-        $messageHeader = 'Selamat datang di Daihatsu';
-        Mail::to($request->email)->send(new SendEmail($messageHeader, $createBarcode['link_file'], $createBarcode['nik']));
-            
+   
         return new PostResource(true, 'Sukses Registrasi!', $register);
         } catch (GuzzleException $th) {
             return response()->json(['message' => $th->getResponse()], 500);
@@ -70,14 +84,36 @@ class RegisterController extends Controller
 
     }
 
+    public function cekRegister(Request $request){
+        $validator = Validator::make($request -> all(),[
+            'nik' =>'required',
+            'email'=> 'required'
+        ]);
+
+        if($validator -> fails()){
+            return response()->json($validator->errors(), 422);
+        }
+
+        $data = Register::where('nik', $request->nik)->where('email', $request->email)->first();
+        if (!$data) {
+            return response()->json([
+                'code' => 404,
+                'status' => 'Error',
+                'message' => 'Data Anda tidak Ada, Anda belum terdaftar!'
+            ], 404);
+        }
+
+        return new PostResource(true, 'Success', $data);
+    }   
+
 
     public function generateQrCode($nik){
         $qrCodeImage = QrCode::format('png')
         // ->merge('img/t.jpg', 0.1, true)
             ->size(200)->errorCorrection('H')
             ->generate($nik);
-        $output_file = '/img/qr-code/img-' . $nik . '.png';
-        $saveImage = Storage::disk('local')->put($output_file, $qrCodeImage); 
+        $output_file = 'img/qr-code/img-' . $nik . '.png';
+        $saveImage = Storage::disk('public')->put($output_file, $qrCodeImage); 
 
         $resultArray = [
             'link_file' => $output_file,
