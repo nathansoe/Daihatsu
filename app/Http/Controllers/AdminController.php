@@ -15,28 +15,54 @@ class AdminController extends Controller
         $this->registers = $registers;
     }
 
-    public function allKehadiran(){
-        $all = $this->registers->allKehadiran();
-        return new PostResource(true, 'Success', $all);
+    public function filterKehadiran($status){
+        if($status == '0'){
+            $registers = $this->registers->tidakHadir();
+        }
+        else if($status == 1){
+            $registers = $this->registers->hadir();
+
+        }else {
+            $registers = $this->registers->allKehadiran();
+        }
+
+        return new PostResource(true, 'Success', $registers);
+
     }
 
-    public function hadir(){
+    public function registExport( Request $request){
+        $status = $request->query('status');
+        $fileName = $status.'_register.xlsx';
 
-        $hadir = $this->registers->hadir();
-        return new PostResource(true, 'Success', $hadir);
-
+        
     }
 
-    public function tidakHadir(){
+    // public function allKehadiran(){
+    //     $all = $this->registers->allKehadiran();
+    //     return new PostResource(true, 'Success', $all);
+    // }
 
-        $tidakHadir = $this->registers->tidakHadir();
-        return new PostResource(true, 'Success', $tidakHadir);
+    public function jsonDataKehadiran($qrcodeId){
+        $qrcodeId = Register::where('nik', $qrcodeId)->first();
+        if(!$qrcodeId){
+                return response()->json([
+                    'code' => 404,
+                    'status' => 'Error',
+                    'message' => 'Data QR tersebut tidak ada!'
+                ], 404);
+        }
 
+        $data_json = [
+            'nik' => $qrcodeId->nik,
+            'nama' => $qrcodeId->nama,
+            'email' => $qrcodeId->email
+        ];
+
+        return new PostResource(true, 'success', $data_json);
     }
 
     public function verifikasiKehadiran($qrcodeId){
-        $qrcodeId = Register::findOrFail($qrcodeId);
-        return $qrcodeId;die();
+        $qrcodeId = Register::where('nik', $qrcodeId)->first();
         if(!$qrcodeId){
                 return response()->json([
                     'code' => 404,
@@ -47,7 +73,7 @@ class AdminController extends Controller
 
         $qrcodeId->status = 1;
         $qrcodeId->save();
-        return new PostResource(true, 'Kedatangan terverifikasi!', 'NIK anda' . $qrcodeId);
+        return new PostResource(true, 'Kedatangan terverifikasi!', 'NIK anda ' . $qrcodeId->nik);
 
     }
 }

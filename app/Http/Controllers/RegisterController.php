@@ -103,12 +103,20 @@ class RegisterController extends Controller
             ], 404);
         }
 
-        return new PostResource(true, 'Success', $data);
+        $showData = [
+            'nama' => $data->nama,
+            'nik' => $data->nik,
+            'email' => $data->email,
+            'link_qrcode' => $data->link_qrcode
+        ];
+
+        return new PostResource(true, 'Success', $showData);
     }   
 
 
     public function generateQrCode($nik){
         $qrCodeImage = QrCode::format('png')
+            ->margin(1)
         // ->merge('img/t.jpg', 0.1, true)
             ->size(200)->errorCorrection('H')
             ->generate($nik);
