@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
 
@@ -14,18 +15,16 @@ class SendEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject;
-    public $pathImage;
-    public $qrcodeId;
+    public $payloadMail;
+    public ?array $qr_image;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($subject, $pathImage, $qrcodeId)
+    public function __construct($payloadMail, $qr_image)
     {
-        $this->subject= $subject; 
-        $this->pathImage= $pathImage;
-        $this->qrcodeId = $qrcodeId; 
+        $this->subject= $payloadMail; 
+        $this->subject= $qr_image; 
     }
 
     /**
@@ -34,11 +33,14 @@ class SendEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from : new Address('ridwanhiday49@gmail.com','Daihatsu Sahabatku'),
-            replyTo: [
-                new Address('ridwanhiday49@gmail.com','Daihatsu Sahabatku'),
-            ],
-            subject: $this->subject,
+            // from : new Address('ridwanhiday49@gmail.com','Daihatsu Sahabatku'),
+            // replyTo: [
+            //     new Address('ridwanhiday49@gmail.com','Daihatsu Sahabatku'),
+            // ],
+            // return $this->payloadMail['subject'];
+            // die();
+
+            subject: $this->payloadMail,
         );
     }
 
@@ -56,16 +58,15 @@ class SendEmail extends Mailable
     /**
      * Get the attachments for the message.
      *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
     public function attachments(): array
     {
+
+        // return $this->qr_image['image'];
+        // die();
         return [
-            Attachment::fromStorageDisk('local', $this->pathImage)->as($this->qrcodeId . '.png')
+            Attachment::fromPath($this->qr_image['image'])
         ];
     }
 
-    // public function build() {
-    //     return $this->view('emails.success'); 
-    //   }
 }

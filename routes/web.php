@@ -10,6 +10,7 @@ Route::get('/', function(){
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 
+
 Route::get('/dashboard', function () {
     // return view('dashboard');
     return view('welcome');

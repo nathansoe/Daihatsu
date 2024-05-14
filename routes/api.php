@@ -12,7 +12,8 @@ Route::get('/hello', function () {
 
 
 Route::post('/register', [RegisterController::class, 'store']);
-Route::get('/all', [AdminController::class, 'allKehadiran']);
-Route::get('/hadir', [AdminController::class, 'hadir']);
-Route::get('/tidakHadir', [AdminController::class, 'tidakHadir']);
-Route::post('/verifikasiKehadiran/{qrcodeId}', [AdminController::class, 'verifikasiKehadiran'])->name('verifikasiKehadiran');
+Route::get('/cekRegister', [RegisterController::class, 'cekRegister']);
+Route::get('/all/filter/{status}', [AdminController::class, 'filterKehadiran'])->name('filter');
+Route::get('/register/export', [AdminController::class, 'registExport'])->name('regist.export');
+Route::post('/verifikasiKehadiran/{id}', [AdminController::class, 'verifikasiKehadiran'])->name('verifikasiKehadiran');
+Route::post('/dataKehadiran/{id}', [AdminController::class, 'jsonDataKehadiran'])->name('jsonKehadiran');
