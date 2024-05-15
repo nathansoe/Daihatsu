@@ -20,10 +20,10 @@ class Register extends Model
 
       public function allKehadiran(){
         $query = "SELECT 
-        nama as NAMA, email as EMAIL, nik as NIK, domisili as DOMISILI, jenis_peserta as JENIS, jumlah_hadir as JUMLAH,  
+        nama, email, nik, domisili, jenis_peserta as jenis, jumlah_hadir as jumlah, no_hp,
         case 
         when status = 0 then 'Tidak Hadir'  
-        when status = 1 then 'Hadir' end as KEHADIRAN 
+        when status = 1 then 'Hadir' end as kehadiran,  created_at as tanggal_daftar
         from register";
         $hadir = DB::select($query);
         return $hadir;
@@ -31,20 +31,20 @@ class Register extends Model
 
     public function hadir(){
         $query = "SELECT 
-        nama as NAMA, email as EMAIL, nik as NIK, domisili as DOMISILI, jenis_peserta as JENIS, jumlah_hadir as JUMLAH,  
+        nama, email, nik, domisili, jenis_peserta as jenis, jumlah_hadir as jumlah, no_hp,
         case 
         when status = 0 then 'Tidak Hadir'  
-        when status = 1 then 'Hadir' end as KEHADIRAN 
+        when status = 1 then 'Hadir' end as kehadiran,  created_at as tanggal_daftar
         from register WHERE status = 1" ;
         $hadir = DB::select($query);
         return $hadir;
     }
     public function tidakHadir(){
         $query = "SELECT 
-        nama as NAMA, email as EMAIL, nik as NIK, domisili as DOMISILI, jenis_peserta as JENIS, jumlah_hadir as JUMLAH,  
+        nama, email, nik, domisili, jenis_peserta as jenis, jumlah_hadir as jumlah, no_hp,
         case 
         when status = 0 then 'Tidak Hadir'  
-        when status = 1 then 'Hadir' end as KEHADIRAN 
+        when status = 1 then 'Hadir' end as kehadiran,  created_at as tanggal_daftar
         from register WHERE status = 0";
         $hadir = DB::select($query);
         return $hadir;
