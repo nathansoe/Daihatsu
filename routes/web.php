@@ -5,7 +5,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\RegisterController;
 
 Route::get('/', function(){
     return view('pages/guest/index');
