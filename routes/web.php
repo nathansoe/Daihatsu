@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\RegisterController;
 
 Route::get('/', function(){
     return view('pages/guest/index');
@@ -22,4 +23,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::post('/register', [RegisterController::class, 'store'])->name('register');
+
+// require __DIR__.'/auth.php';

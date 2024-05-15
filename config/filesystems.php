@@ -56,6 +56,10 @@ return [
             'throw' => false,
         ],
 
+        'intervention' => [
+            'driver' => 'imagick',
+        ],        
+
     ],
 
     /*
