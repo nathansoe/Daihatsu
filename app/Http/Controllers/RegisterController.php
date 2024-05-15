@@ -43,16 +43,16 @@ class RegisterController extends Controller
             $status = 0;
             $createBarcode = $this->generateQrCode($request->nik);
 
-            $qr_image =
-                [
-                    'image' => url('storage/app/public/' . $createBarcode['link_file'])
-                ];
-            $messageHeader = 'Selamat datang di Daihatsu';
-            return $qr_image;
-            die();
-            Mail::to($request->email)->send(new SendEmail($messageHeader, $qr_image));
+        $qr_image = 
+        [
+           'image' => url('storage/app/public/' . $createBarcode['link_file'])
+        ];
+        // $messageHeader = 'Selamat datang di Daihatsu';
+        // return $qr_image;
+        // die();
+        // Mail::to($request->email)->send(new SendEmail($messageHeader, $qr_image));
 
-            // storage_path($createBarcode['link_file']);
+        // // storage_path($createBarcode['link_file']);
 
 
 
