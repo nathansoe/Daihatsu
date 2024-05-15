@@ -61,7 +61,7 @@ class AdminController extends Controller
         $sheet->setCellValue('H1', 'KEHADIRAN');
         $sheet->setCellValue('I1', 'TANGGAL DAFTAR');
 
-        $row = 9;
+        $row = 2;
         foreach ($registers as $item) {
             $sheet->setCellValue('A'. $row , $item->nik);
             $sheet->setCellValue('B'. $row , $item->nama);
@@ -86,7 +86,7 @@ class AdminController extends Controller
             $fileName = 'Data_Kehadiran_All.xlsx';
         }
         $writer->save($fileName);
-        return response()->download($fileName)->deleteFileAfterSend(true);
+        return response()->download($fileName);
     }
 
     public function jsonDataKehadiran($qrcodeId){
