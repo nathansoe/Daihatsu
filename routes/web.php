@@ -8,10 +8,11 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::get('/', function(){
     return view('pages/guest/index');
-});
+})->name('user.page');
 
 Route::post('/registerUser', [RegisterController::class, 'storeUser']);
 Route::get('/cekRegister', [RegisterController::class, 'cekRegister']);
+Route::get('/download-qr/{nik}', [RegisterController::class, 'downloadQr'])->name('download');
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::post('login', [AuthenticatedSessionController::class, 'store']);
