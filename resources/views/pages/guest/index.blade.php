@@ -5,6 +5,7 @@
 @section('main')
     {{-- Modal --}}
     @include('components.guest.register-modal')
+    @include('components.guest.cek-barcode-modal')
     {{-- End Modal --}}
     <section class="rounded-xl min-h-screen">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 flex flex-col gap-4">
@@ -31,10 +32,12 @@
                         Area Bundaran Tarian Langit Harapan Indah, Bekasi
                     </p>
                     <div>
-                        <div class="w-full flex justify-center md:justify-start">
+                        <div class="w-full flex justify-center md:justify-start gap-4">
                             <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
                                 class="text-white w-full md:w-auto bg-[#FBB41D] px-3 py-2 rounded-lg text-semibold">Daftar
                                 Sekarang</button>
+                            <button data-modal-target="checkBarcode" data-modal-toggle="checkBarcode"
+                                class="text-white w-full md:w-auto bg-[#FBB41D] px-3 py-2 rounded-lg text-semibold">Cek Barcode</button>
                         </div>
                         <p class="mt-2 text-xs text-white text-center md:text-start"><span
                                 class="text-[#FBB41D]">*</span>Syarat dan ketentuan berlaku</p>
@@ -120,8 +123,36 @@
             });
         });
 
+        $('#checkBarcode').on('submit', function(event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: formData,
+                success: function(response) {
+                    downloadQr(response.nik)
+                    Swal.fire({
+                        title: 'Registrasi Berhasil',
+                        text: 'Registrasi Sukses',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error Gan')
+                    Swal.fire({
+                        title: 'Ooops!!!',
+                        text: error,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
+                }
+            });
+        });
+
         function downloadQr(nik) {
-            window.location.href = '{{url('/download-qr/')}}/'+nik;
+            window.location.href = '{{ url('/download-qr/') }}/' + nik;
         }
     </script>
 @endsection

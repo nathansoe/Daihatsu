@@ -72,7 +72,6 @@ class RegisterController extends Controller
 
     public function cekRegister(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'nik' => 'required',
             'email' => 'required'
