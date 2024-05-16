@@ -33,7 +33,6 @@ class RegisterController extends Controller
                 return response()->json($validator->errors(), 422);
             }
 
-            die();
             $checkNIK = Register::where('nik', $request->nik)->first();
             if ($checkNIK) {
                 return response()->json([
@@ -61,10 +60,10 @@ class RegisterController extends Controller
             $showValue = [
                 'nik' => $request->nik,
                 'nama' => $request->nama,
-                'link_qrcode' => $createBarcode['link_file']
+                'link_qrcode' => storage_path('app/public/' . $createBarcode['link_file'])
             ];
 
-            // return new PostResource(true, 'Sukses Registrasi!', $register);
+            // return new PostResource(true, 'Sukses Registrasi!', $showValue);
             return redirect()->route('user.page', ['register' =>  $showValue])->with('success', 'Registrasi Berhasil!');
         } catch (GuzzleException $th) {
             return redirect()->back(['message' => $th->getResponse()], 500);
@@ -96,7 +95,7 @@ class RegisterController extends Controller
             'nama' => $data->nama,
             'nik' => $data->nik,
             'email' => $data->email,
-            'link_qrcode' => $data->link_qrcode
+            'link_qrcode' => storage_path('app/public/' . $data->link_qrcode)
         ];
 
         return new PostResource(true, 'Success', $showData);
@@ -115,11 +114,8 @@ class RegisterController extends Controller
           if (file_exists($filePath)) {
             return response()->download($filePath);
         } else {
-            // Return a 404 Not Found response if the file does not exist
             abort(404);
-        }
-
-      
+        }      
     }
 
 
