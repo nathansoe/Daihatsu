@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function(){
     return view('pages/guest/index');
@@ -40,6 +41,4 @@ Route::middleware('auth')->group(function () {
     ->name('logout');
 });
 
-Route::post('/register', [RegisterController::class, 'store'])->name('register');
-
-// require __DIR__.'/auth.php';
+Route::post('/register', [RegisterController::class, 'storeUser'])->name('register');
