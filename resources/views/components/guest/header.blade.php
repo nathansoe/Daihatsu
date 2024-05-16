@@ -1,4 +1,5 @@
-<div id="confirmation" tabindex="-1" aria-hidden="true"
+<header>
+    {{-- <div id="confirmation" tabindex="-1" aria-hidden="true"
     class="hidden overflow-y-auto mx-4 overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-2xl max-h-full">
         <!-- Modal content -->
@@ -40,8 +41,7 @@
             </div>
         </div>
     </div>
-</div>
-<header>
+</div> --}}
     <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             <a href="https://flowbite.com" class="flex items-center">
@@ -76,13 +76,18 @@
                 <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                     <li>
                         <a href="#"
-                            class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
+                            class="block py-2 pr-4 pl-3 text-black rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
                             aria-current="page">Home</a>
                     </li>
                     <li>
-                        <button data-modal-target="confirmation" data-modal-toggle="confirmation"
-                            class="text-white w-full md:w-auto bg-black px-3 py-2 rounded-lg text-semibold">Check
-                            Barcode</button>
+                        <a href="#"
+                            class="block py-2 pr-4 pl-3 text-black rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
+                            aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="block py-2 pr-4 pl-3 text-black rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
+                            aria-current="page">Home</a>
                     </li>
                 </ul>
             </div>

@@ -63,10 +63,9 @@ class RegisterController extends Controller
                 'link_qrcode' => storage_path('app/public/' . $createBarcode['link_file'])
             ];
 
-            // return new PostResource(true, 'Sukses Registrasi!', $showValue);
-            return redirect()->route('user.page', ['register' =>  $showValue])->with('success', 'Registrasi Berhasil!');
+            return response()->json($showValue, 200);
         } catch (GuzzleException $th) {
-            return redirect()->back(['message' => $th->getResponse()], 500);
+            return response()->json(['message' => $th->getResponse()], 500);
         }
     }
 
@@ -101,8 +100,10 @@ class RegisterController extends Controller
         return new PostResource(true, 'Success', $showData);
     }
 
-    public function downloadQr($nik){
+    public function downloadQr($nik)
+    {
         $data = Register::where('nik', $nik)->first();
+
         if (!$data) {
             return response()->json([
                 'code' => 404,
@@ -110,12 +111,15 @@ class RegisterController extends Controller
                 'message' => 'Qrcode Anda tidak ada!'
             ], 404);
         }
+
         $filePath =  storage_path('app/public/' . $data->link_qrcode);
+          // Check if the file exists
           if (file_exists($filePath)) {
+            // Return the file as a response
             return response()->download($filePath);
         } else {
-            abort(404);
-        }      
+            return response()->json('error', 500);
+        }
     }
 
 
