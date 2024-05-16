@@ -26,43 +26,49 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <form class="p-4 md:p-5" name="register" id="register" method="POST" action="{{url('registerUser')}}">
+                <form class="p-4 md:p-5" name="register" id="register" method="POST" action="{{ url('register') }}">
                     @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">
-                            <label for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Lengkap</label>
-                            <input type="text" name="nama" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
+                                Lengkap</label>
+                            <input type="text" name="nama" id="name"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="Masukkan Nama Lengkap Sesuai KTP" required="">
                         </div>
                         <div class="col-span-2">
                             <label for="email"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                            <input type="text" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            <input type="text" name="email" id="email"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="Masukkan Email" required="">
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="nik"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Induk Kependudukan</label>
-                            <input type="text" name="nik" id="nik" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor
+                                Induk Kependudukan</label>
+                            <input type="text" name="nik" id="nik"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="Masukkan NIK" required="">
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="no_hp"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No. Telfon</label>
-                            <input type="text" name="no_hp" id="no_hp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            <label for="no_hp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No.
+                                Telfon</label>
+                            <input type="text" name="no_hp" id="no_hp"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="Masukkan Nomor Handphone" required="">
                         </div>
                         <div class="col-span-2 sm:col-span-1">
                             <label for="jenis_peserta"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Peserta</label>
-                            <input type="text" name="jenis_peserta" id="jenis_peserta" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            <input type="text" name="jenis_peserta" id="jenis_peserta"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="Masukkan Jenis Peserta" required="">
                         </div>
                         <div class="col-span-2 sm:col-span-1">
                             <label for="jumlah_hadir"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah Hadir</label>
-                            <input type="text" name="jumlah_hadir" id="jumlah_hadir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            <input type="text" name="jumlah_hadir" id="jumlah_hadir"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="Masukkan Jumlah Hadir" required="">
                         </div>
                         <div class="col-span-2">
@@ -169,4 +175,39 @@
             </div>
         </div>
     </section>
+@endsection
+@section('script')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#register').on('submit', function(event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: formData,
+                success: function(response) {
+                    console.log(response)
+                    Swal.fire({
+                        title: 'Registrasi Berhasil',
+                        text: 'Registrasi Sukses',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                },
+                error: function(xhr, status, error) {
+                    console.log(error)
+                    console.log('Error Gan')
+                    Swal.fire({
+                        title: 'Ooops!!!',
+                        text: error,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
+                }
+            });
+        });
+    </script>
 @endsection
