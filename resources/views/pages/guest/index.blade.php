@@ -26,7 +26,7 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <form class="p-4 md:p-5" name="register" id="register" method="POST" action="{{url('register')}}">
+                <form class="p-4 md:p-5" name="register" id="register" method="POST" action="{{url('registerUser')}}">
                     @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">

@@ -15,12 +15,12 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class RegisterController extends Controller
 {
-    public function store(Request $request)
+    public function storeUser(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
                 'nama' => 'required',
-                'nik' => 'required',
+                'nik' => 'required|',
                 'domisili' => 'required',
                 'no_hp' => 'required',
                 'email' => 'required',
@@ -43,22 +43,6 @@ class RegisterController extends Controller
             $status = 0;
             $createBarcode = $this->generateQrCode($request->nik);
 
-            $qr_image =
-                [
-                    'image' => url('storage/app/public/' . $createBarcode['link_file'])
-                ];
-            $messageHeader = 'Selamat datang di Daihatsu';
-            return $qr_image;
-            die();
-            Mail::to($request->email)->send(new SendEmail($messageHeader, $qr_image));
-
-            // storage_path($createBarcode['link_file']);
-
-
-
-            return $createBarcode['link_file'];
-            die();
-
             $register = Register::create([
                 'nama' => $request->nama,
                 'nik' => $request->nik,
@@ -73,9 +57,10 @@ class RegisterController extends Controller
             ]);
 
 
-            return new PostResource(true, 'Sukses Registrasi!', $register);
+            // return new PostResource(true, 'Sukses Registrasi!', $register);
+            return redirect()->route('/',['link_qrcode' => $createBarcode['link_file']]);
         } catch (GuzzleException $th) {
-            return response()->json(['message' => $th->getResponse()], 500);
+            return redirect()->back(['message' => $th->getResponse()], 500);
         }
     }
 
@@ -118,7 +103,7 @@ class RegisterController extends Controller
             ->size(200)->errorCorrection('H')
             ->generate($nik);
         $output_file = 'img/qr-code/img-' . $nik . '.png';
-        $saveImage = Storage::disk('public')->put($output_file, $qrCodeImage);
+        Storage::disk('public')->put($output_file, $qrCodeImage);
 
         $resultArray = [
             'link_file' => $output_file,

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Register;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Http\Resources\PostResource;
-use Illuminate\Http\Request;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class AdminController extends Controller
 {
@@ -29,7 +30,7 @@ class AdminController extends Controller
             $registers = $this->registers->allKehadiran();
         }
 
-        return new PostResource(true, 'Success', $registers);
+        return response()->json($registers);
 
     }
 
@@ -57,7 +58,7 @@ class AdminController extends Controller
         $sheet->setCellValue('D1', 'DOMISILI');
         $sheet->setCellValue('E1', 'NOHP');
         $sheet->setCellValue('F1', 'JUMLAH HADIR');
-        $sheet->setCellValue('G1', 'JENIS KEHADIRAN');
+        $sheet->setCellValue('G1', 'JENIS PESERTA');
         $sheet->setCellValue('H1', 'KEHADIRAN');
         $sheet->setCellValue('I1', 'TANGGAL DAFTAR');
 
@@ -119,8 +120,21 @@ class AdminController extends Controller
         }
 
         $qrcodeId->status = 1;
+        $qrcodeId->time_arrive = Carbon::now();
         $qrcodeId->save();
-        return new PostResource(true, 'Kedatangan terverifikasi!', 'NIK anda ' . $qrcodeId->nik);
+        return redirect()->back()->with('success', 'Kedatangan Terverifikasi');
+    }
+
+    public function destroy($id){
+        Register::find($id)->delete();
+        // return response()->json('success');
+        return redirect()->back()->with('success', 'Data Register Terhapus!');
+    }
+
+    public function destroyCheckList(Request $request){
+        $nik_checklist = $request->input('nik');
+        Register::whereIn('nik', $nik_checklist)->delete();
+        return redirect()->back()->with('success', 'Data Register Terhapus!');
 
     }
 }
