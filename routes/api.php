@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/hello', function () {
     return 'Hello World';
-});
+})->name('user.page');
 
 
-// Route::post('/register', [RegisterController::class, 'store']);
+Route::get('/download-qr/{nik}', [RegisterController::class, 'downloadQr'])->name('download');
+Route::post('/register', [RegisterController::class, 'storeUser']);
 // Route::get('/cekRegister', [RegisterController::class, 'cekRegister']);
 // Route::get('/all/filter/{status}', [AdminController::class, 'filterKehadiran'])->name('filter');
 // Route::get('/export-excel', [AdminController::class, 'exportExcel'])->name('export');
