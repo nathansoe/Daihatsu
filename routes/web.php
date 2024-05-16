@@ -10,14 +10,16 @@ Route::get('/', function(){
     return view('pages/guest/index');
 });
 
-Route::post('/register', [RegisterController::class, 'store']);
+Route::post('/registerUser', [RegisterController::class, 'storeUser']);
 Route::get('/cekRegister', [RegisterController::class, 'cekRegister']);
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::post('login', [AuthenticatedSessionController::class, 'store']);
+
 
 Route::get('/dashboard', function () {
-    // return view('dashboard');
-    return view('welcome');
+    return view('pages.admin.index');
+    // return view('welcome');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -28,8 +30,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/export-excel', [AdminController::class, 'exportExcel'])->name('export');
     Route::post('/verifikasiKehadiran/{id}', [AdminController::class, 'verifikasiKehadiran'])->name('verifikasiKehadiran');
     Route::post('/dataKehadiran/{id}', [AdminController::class, 'jsonDataKehadiran'])->name('jsonKehadiran');
+    Route::get('/delete/{id}', [AdminController::class, 'destroy'])->name('admin.delete');
+    Route::post('/deleteList', [AdminController::class, 'destroyCheckList'])->name('admin.deleteList');
 
+    
 
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('logout');
 });
 
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
