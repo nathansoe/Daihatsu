@@ -95,6 +95,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        var nik_id = 1
+
         $('#register').on('submit', function(event) {
             event.preventDefault();
             var formData = $(this).serialize();
@@ -103,7 +105,10 @@
                 url: $(this).attr('action'),
                 data: formData,
                 success: function(response) {
-                    downloadQr(response.nik)
+                    console.log(response)
+                    nik_id = response.nik
+                    $('#barcodeResultRegister').attr('src', response.link_qrcode);
+                    $('#containerBarcodeRegister').show();
                     Swal.fire({
                         title: 'Registrasi Berhasil',
                         text: 'Registrasi Sukses',
@@ -123,7 +128,7 @@
             });
         });
 
-        $('#checkBarcode').on('submit', function(event) {
+        $('#check').on('submit', function(event) {
             event.preventDefault();
             var formData = $(this).serialize();
             $.ajax({
@@ -131,13 +136,10 @@
                 url: $(this).attr('action'),
                 data: formData,
                 success: function(response) {
-                    downloadQr(response.nik)
-                    Swal.fire({
-                        title: 'Registrasi Berhasil',
-                        text: 'Registrasi Sukses',
-                        icon: 'success',
-                        confirmButtonText: 'Ok'
-                    })
+                    console.log(response)
+                    nik_id = response.data.nik
+                    $('#barcodeResult').attr('src', response.link_qrcode);
+                    $('#containerBarcode').show();
                 },
                 error: function(xhr, status, error) {
                     console.log('Error Gan')
@@ -150,6 +152,14 @@
                 }
             });
         });
+
+        $('#barcodeDownload').on('click', function(event){
+            downloadQr(nik_id)
+        })
+
+        $('#barcodeDownloadRegister').on('click', function(event){
+            downloadQr(nik_id)
+        })
 
         function downloadQr(nik) {
             window.location.href = '{{ url('/download-qr/') }}/' + nik;

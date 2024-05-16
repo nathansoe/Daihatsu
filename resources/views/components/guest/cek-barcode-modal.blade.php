@@ -11,7 +11,8 @@
             </div>
             <!-- Modal body -->
             <div class="p-4 md:p-5 space-y-4">
-                <form class="p-4 md:p-5" name="check" id="check" method="POST" action="#">
+                @include('components.guest.barcode-container')
+                <form class="p-4 md:p-5" name="check" id="check" method="POST" action="{{ url('cekRegister') }}">
                     @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2 sm:col-span-2">

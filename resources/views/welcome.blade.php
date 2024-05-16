@@ -57,7 +57,6 @@
 
 @section('script')
     <script src="https://unpkg.com/html5-qrcode"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         window.onload = function() {
             startCamera();
@@ -65,30 +64,7 @@
         var camera = document.getElementById("camera").value;
         const html5QrCode = new Html5Qrcode("preview");
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-            // $.ajax({
-            //     type: 'POST',
-            //     url: $(this).attr('action'),
-            //     data: formData,
-            //     success: function(response) {
-            //         console.log(response)
-            //         Swal.fire({
-            //             title: 'Registrasi Berhasil',
-            //             text: 'Registrasi Sukses',
-            //             icon: 'success',
-            //             confirmButtonText: 'Ok'
-            //         })
-            //     },
-            //     error: function(xhr, status, error) {
-            //         console.log(error)
-            //         console.log('Error Gan')
-            //         Swal.fire({
-            //             title: 'Ooops!!!',
-            //             text: error,
-            //             icon: 'error',
-            //             confirmButtonText: 'Ok'
-            //         })
-            //     }
-            // });
+            // window.location.href = decodedText;
             document.getElementById('confirmation').setAttribute("style", "display:block")
         };
         const config = {

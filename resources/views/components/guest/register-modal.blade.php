@@ -20,6 +20,22 @@
                 </button>
             </div>
             <!-- Modal body -->
+            <div class="mb-5 hidden" id="containerBarcodeRegister">
+                <center>
+                    <p class="text-xl font-semibold my-3">Your Barcode</p>
+                    <img class="h-auto max-w-full" id="barcodeResultRegister" src="{{ asset('storage/img/qr-code/img-1.png') ?? '#' }}"
+                        alt="image description">
+                </center>
+                <div class="flex w-full justify-center my-2">
+                    <button type="button"
+                        id="barcodeDownloadRegister"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Download
+                        <span class="sr-only">Download Barcode</span>
+                    </button>
+                </div>
+            </div>
+            
             <form class="p-4 md:p-5" name="register" id="register" method="POST" action="{{ url('register') }}">
                 @csrf
                 <div class="grid gap-4 mb-4 grid-cols-2">
