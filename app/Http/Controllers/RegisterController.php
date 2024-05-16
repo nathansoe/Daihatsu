@@ -33,7 +33,6 @@ class RegisterController extends Controller
                 return response()->json($validator->errors(), 422);
             }
 
-            die();
             $checkNIK = Register::where('nik', $request->nik)->first();
             if ($checkNIK) {
                 return response()->json([
@@ -61,7 +60,7 @@ class RegisterController extends Controller
             $showValue = [
                 'nik' => $request->nik,
                 'nama' => $request->nama,
-                'link_qrcode' => $createBarcode['link_file']
+                'link_qrcode' => storage_path('app/public/' . $createBarcode['link_file'])
             ];
 
             return response()->json($showValue, 200);
@@ -94,7 +93,7 @@ class RegisterController extends Controller
             'nama' => $data->nama,
             'nik' => $data->nik,
             'email' => $data->email,
-            'link_qrcode' => $data->link_qrcode
+            'link_qrcode' => storage_path('app/public/' . $data->link_qrcode)
         ];
 
         return new PostResource(true, 'Success', $showData);
