@@ -18,20 +18,22 @@ class RegisterController extends Controller
     public function storeUser(Request $request)
     {
         try {
+
             $validator = Validator::make($request->all(), [
                 'nama' => 'required',
-                'nik' => 'required|',
+                'nik' => 'required|numeric|digits:16',
                 'domisili' => 'required',
-                'no_hp' => 'required',
-                'email' => 'required',
+                'no_hp' => 'required|numeric',
+                'email' => 'required|email',
                 'jenis_peserta' => 'required',
-                'jumlah_hadir' => 'required',
+                'jumlah_hadir' => 'required|numeric',
             ]);
 
             if ($validator->fails()) {
                 return response()->json($validator->errors(), 422);
             }
 
+            die();
             $checkNIK = Register::where('nik', $request->nik)->first();
             if ($checkNIK) {
                 return response()->json([
@@ -70,6 +72,7 @@ class RegisterController extends Controller
 
     public function cekRegister(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'nik' => 'required',
             'email' => 'required'
@@ -111,8 +114,9 @@ class RegisterController extends Controller
         }
 
         $filePath =  storage_path('app/public/' . $data->link_qrcode);
-
-        if (file_exists($filePath)) {
+          // Check if the file exists
+          if (file_exists($filePath)) {
+            // Return the file as a response
             return response()->download($filePath);
         } else {
             return response()->json('error', 500);
