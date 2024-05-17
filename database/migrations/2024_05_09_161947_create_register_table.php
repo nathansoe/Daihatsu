@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('qrcode_id')->nullable();
             $table->string('link_qrcode')->nullable();
+            $table->datetime('time_arrive')->nullable();
             $table->timestamps();
         });
     }
