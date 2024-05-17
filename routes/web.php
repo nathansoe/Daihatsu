@@ -20,9 +20,12 @@ Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
 
 Route::get('/dashboard', function () {
-    // return view('pages.admin.index');
-    return view('welcome');
+    return view('pages.admin.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::get('/report', function () {
+//     return view('pages.admin.report');
+// })->middleware(['auth', 'verified'])->name('report');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -33,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/verifikasiKehadiran/{id}', [AdminController::class, 'verifikasiKehadiran'])->name('verifikasiKehadiran');
     Route::post('/dataKehadiran/{id}', [AdminController::class, 'jsonDataKehadiran'])->name('jsonKehadiran');
     Route::get('/delete/{id}', [AdminController::class, 'destroy'])->name('admin.delete');
+    Route::get('/report/{status}', [AdminController::class, 'filterKehadiran']);
     Route::post('/deleteList', [AdminController::class, 'destroyCheckList'])->name('admin.deleteList');
 
     

@@ -29,9 +29,9 @@ class AdminController extends Controller
         }else {
             $registers = $this->registers->allKehadiran();
         }
-
-        return response()->json($registers);
-
+        // dd($registers);
+        // return response()->json($registers);
+        return view('pages.admin.report', ['users' => $registers]);
     }
 
     public function exportExcel(Request $request){

@@ -136,14 +136,15 @@
         function submit() {
             $.ajax({
                 type: 'POST',
-                url: "{{ url('verifikasiKehadiran') }}/" + id,
+                url: "{{ url('verifikasiKehadiran') }}"+"/"+id,
                 headers: {
                     'X-CSRF-TOKEN': csrfToken
                 },
                 success: function(response) {
-                    console.log(response)
+                    $('#verify').hide()
                 },
                 error: function(xhr, status, error) {
+                    console.log(error)
                     console.log('Error Gan')
                 }
             });
