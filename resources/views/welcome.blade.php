@@ -4,39 +4,38 @@
 @section('sub_title', 'Dashboard')
 
 @section('main')
+    <button data-modal-target="verify" class="hidden" data-modal-toggle="verify" class="btn">Open Modal</button>
     {{-- Modal --}}
-    <div id="confirmation" tabindex="-1" aria-hidden="true"
-        class="hidden overflow-y-auto mx-4 overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div id="verify" data-modal-hide="verify" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Konfirmasi Data Pengunjung
+                        Data verification
                     </h3>
-                    <button type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                        data-modal-hide="default-modal">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
                 </div>
                 <!-- Modal body -->
                 <div class="p-4 md:p-5 space-y-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod dicta adipisci consectetur maxime ut provident qui soluta dignissimos laudantium, impedit mollitia repudiandae, expedita perferendis? Pariatur voluptas neque tempora fugit doloribus.
+                    <p class="text-xl">Nomor Induk Kependudukan</p>
+                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400" id="nikPrev"></p>
+                    <p class="text-xl mt-4">Nomor Telefon</p>
+                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400" id="noPrev"></p>
                 </div>
                 <!-- Modal footer -->
-                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button data-modal-hide="default-modal" type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I
-                        accept</button>
-                    <button data-modal-hide="default-modal" type="button"
-                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>
+                <div class="flex w-full justify-center py-5">
+                    <button type="button" id="verifyButton"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Verifikasi
+                        <svg class="w-4 h-4 mx-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 5h12m0 0L9 1m4 4L9 9" />
+                        </svg>
+                        <span class="sr-only">Icon description</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -56,40 +55,39 @@
 @endsection
 
 @section('script')
-    <script src="https://unpkg.com/html5-qrcode"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
     <script>
         window.onload = function() {
             startCamera();
+            console.log('run')
+            document.querySelector('[data-modal-toggle="verify"]').click();
+            console.log('run')
         };
+        var id = 0
+        const csrfToken = "{{ csrf_token() }}"
         var camera = document.getElementById("camera").value;
         const html5QrCode = new Html5Qrcode("preview");
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-            // $.ajax({
-            //     type: 'POST',
-            //     url: $(this).attr('action'),
-            //     data: formData,
-            //     success: function(response) {
-            //         console.log(response)
-            //         Swal.fire({
-            //             title: 'Registrasi Berhasil',
-            //             text: 'Registrasi Sukses',
-            //             icon: 'success',
-            //             confirmButtonText: 'Ok'
-            //         })
-            //     },
-            //     error: function(xhr, status, error) {
-            //         console.log(error)
-            //         console.log('Error Gan')
-            //         Swal.fire({
-            //             title: 'Ooops!!!',
-            //             text: error,
-            //             icon: 'error',
-            //             confirmButtonText: 'Ok'
-            //         })
-            //     }
-            // });
-            document.getElementById('confirmation').setAttribute("style", "display:block")
+            console.log(decodedText)
+            console.log(csrfToken)
+            $.ajax({
+                type: 'POST',
+                url: "{{ url('dataKehadiran') }}/" + decodedText,
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(response) {
+                    console.log(response)
+                    id = response.data.nik
+                    $('#nikPrev').html(response.data.nik)
+                    $('#noPrev').html(response.data.qrcode)
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error Gan')
+                }
+            });
+            $('#verify').show()
         };
         const config = {
             fps: 10,
@@ -127,6 +125,27 @@
             }).catch((err) => {
                 // Stop failed, handle it.
                 window.location = 'https://www.online-qr-scanner.com/';
+            });
+        }
+
+        $('#verifyButton').on('click', function(event){
+            console.log(id)
+            submit()
+        })
+
+        function submit() {
+            $.ajax({
+                type: 'POST',
+                url: "{{ url('verifikasiKehadiran') }}/" + id,
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(response) {
+                    console.log(response)
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error Gan')
+                }
             });
         }
     </script>

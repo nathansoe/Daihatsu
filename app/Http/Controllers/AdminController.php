@@ -103,7 +103,8 @@ class AdminController extends Controller
         $data_json = [
             'nik' => $qrcodeId->nik,
             'nama' => $qrcodeId->nama,
-            'email' => $qrcodeId->email
+            'email' => $qrcodeId->email,
+            'qrcode' => $qrcodeId->no_hp
         ];
 
         return new PostResource(true, 'success', $data_json);

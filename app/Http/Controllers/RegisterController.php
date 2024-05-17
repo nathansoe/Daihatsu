@@ -1,14 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
-
-use App\Mail\SendEmail;
 use App\Models\Register;
 use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
-use Illuminate\Support\Facades\Mail;
 use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -60,7 +55,7 @@ class RegisterController extends Controller
             $showValue = [
                 'nik' => $request->nik,
                 'nama' => $request->nama,
-                'link_qrcode' => storage_path('app/public/' . $createBarcode['link_file'])
+                'link_qrcode' => asset('storage/'.$register->link)
             ];
 
             return response()->json($showValue, 200);
@@ -71,17 +66,16 @@ class RegisterController extends Controller
 
     public function cekRegister(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'nik' => 'required',
-            'email' => 'required'
+            'no_hp' => 'required'
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
-        $data = Register::where('nik', $request->nik)->where('email', $request->email)->first();
+        $data = Register::where('nik', $request->nik)->where('no_hp', $request->no_hp)->first();
         if (!$data) {
             return response()->json([
                 'code' => 404,
@@ -94,7 +88,7 @@ class RegisterController extends Controller
             'nama' => $data->nama,
             'nik' => $data->nik,
             'email' => $data->email,
-            'link_qrcode' => storage_path('app/public/' . $data->link_qrcode)
+            'link_qrcode' => asset('storage/'.$data->link_qrcode)
         ];
 
         return new PostResource(true, 'Success', $showData);

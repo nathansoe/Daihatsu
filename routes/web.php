@@ -12,7 +12,7 @@ Route::get('/', function(){
 })->name('user.page');
 
 Route::post('/registerUser', [RegisterController::class, 'storeUser']);
-Route::get('/cekRegister', [RegisterController::class, 'cekRegister']);
+Route::post('/cekRegister', [RegisterController::class, 'cekRegister']);
 Route::get('/download-qr/{nik}', [RegisterController::class, 'downloadQr'])->name('download');
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -20,8 +20,8 @@ Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
 
 Route::get('/dashboard', function () {
-    return view('pages.admin.index');
-    // return view('welcome');
+    // return view('pages.admin.index');
+    return view('welcome');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
