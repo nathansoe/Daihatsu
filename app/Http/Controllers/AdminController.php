@@ -30,8 +30,8 @@ class AdminController extends Controller
             $registers = $this->registers->allKehadiran();
         }
         // dd($registers);
-        // return response()->json($registers);
-        return view('pages.admin.report', ['users' => $registers]);
+        return response()->json($registers);
+        // return view('pages.admin.report', ['users' => $registers]);
     }
 
     public function exportExcel(Request $request){
@@ -46,7 +46,6 @@ class AdminController extends Controller
         }else {
             $registers = $this->registers->allKehadiran();
         }
-
 
         //create new spreadsheet
         $excel = new Spreadsheet();
@@ -88,6 +87,8 @@ class AdminController extends Controller
         }
         $writer->save($fileName);
         return response()->download($fileName);
+
+        // return 200;
     }
 
     public function jsonDataKehadiran($qrcodeId){

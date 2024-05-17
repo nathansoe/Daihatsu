@@ -12,53 +12,53 @@
 <aside id="default-sidebar"
     class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
     aria-label="Sidebar">
-    <div class="h-full flex flex-col justify-between overflow-y-auto bg-gray-50 dark:bg-gray-800">
+    <div class="h-full flex flex-col justify-between overflow-y-auto bg-[#1C456B] dark:bg-gray-800">
         <div class="px-3 py-4">
-            <div class="h-20 flex items-center justify-center">
-                Logo Here
+            <div class="h-20 flex flex-col gap-2 items-center justify-center">
+                <img src="https://flowbite.com/docs/images/logo.svg" class="h-10 me-3 sm:h-7" alt="Flowbite Logo" />
+                <p class="text-lg font-semibold text-white">Daihatsu</p>
             </div>
-            <ul class="space-y-2 font-medium">
+            <ul class="space-y-4 my-4 font-medium">
                 @php
                     $data = [
                         (object) [
                             'title' => 'Scanner',
                             'path' => '/dashboard',
-                            'icon' =>
-                                'M1000 500c0 276-224 500-500 500S0 776 0 500 224 0 500 0s500 224 500 500zm-125-2c0-105-65-185-176-185-88 0-147 60-199 121-54-64-109-121-200-121-110 0-175 84-175 187 0 108 71 188 179 188 91 0 140-57 196-116 52 60 115 116 198 116 108 0 177-86 177-190zm-437 4c-33 39-87 83-135 83-51 0-81-34-81-83 0-45 30-87 78-87 52 0 105 52 138 87zm341-2c0 47-28 85-79 85-59 0-104-44-137-83 32-35 80-88 134-88 51 1 82 40 82 86z',
+                            'icon' => 'fa-solid fa-qrcode',
                         ],
                         (object) [
                             'title' => 'Report',
-                            'path' => '/report/all',
-                            'icon' =>
-                                'M1000 500c0 276-224 500-500 500S0 776 0 500 224 0 500 0s500 224 500 500zm-125-2c0-105-65-185-176-185-88 0-147 60-199 121-54-64-109-121-200-121-110 0-175 84-175 187 0 108 71 188 179 188 91 0 140-57 196-116 52 60 115 116 198 116 108 0 177-86 177-190zm-437 4c-33 39-87 83-135 83-51 0-81-34-81-83 0-45 30-87 78-87 52 0 105 52 138 87zm341-2c0 47-28 85-79 85-59 0-104-44-137-83 32-35 80-88 134-88 51 1 82 40 82 86z',
+                            'path' => '/report',
+                            'icon' => 'fa-solid fa-sheet-plastic',
                         ],
                     ];
                 @endphp
                 @foreach ($data as $item)
                     <li>
                         <a href="{{ $item->path }}"
-                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
-                                <path d="{{ $item->icon }}"></path>
-                            </svg>
-                            <span class="ms-3">{{ $item->title }}</span>
+                            class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-300 hover:text-black dark:hover:bg-gray-700 group">
+                            <span class="mr-3"><i class="{{ $item->icon }}"></i></span>{{ $item->title }}
                         </a>
                     </li>
                 @endforeach
             </ul>
         </div>
-        <div class="bg-gray-200 h-16 flex items-center px-4">
+        <div class="bg-gray-200 bg-opacity-30 h-16 flex items-center px-4">
             <div class="flex justify-between w-full items-center">
-                {{-- <p class="text-sm">Admin</p> --}}
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-dropdown-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-dropdown-link>
-                </form>
+                <div class="flex flex-col gap-2">
+                    <p class="text-sm text-white">Admin</p>
+                    <p class="text-xs text-white">admin@gmail.com</p>
+                </div>
+                <div>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit"
+                            class="text-white border border-white hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span class="sr-only">Logout</span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

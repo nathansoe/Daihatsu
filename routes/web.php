@@ -23,9 +23,9 @@ Route::get('/dashboard', function () {
     return view('pages.admin.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::get('/report', function () {
-//     return view('pages.admin.report');
-// })->middleware(['auth', 'verified'])->name('report');
+Route::get('/report', function () {
+    return view('pages.admin.report');
+})->middleware(['auth', 'verified'])->name('report');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -39,10 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/report/{status}', [AdminController::class, 'filterKehadiran']);
     Route::post('/deleteList', [AdminController::class, 'destroyCheckList'])->name('admin.deleteList');
 
-    
-
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->name('logout');
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
 Route::post('/register', [RegisterController::class, 'storeUser'])->name('register');
