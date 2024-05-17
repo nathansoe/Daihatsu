@@ -53,7 +53,9 @@
                     src="https://www.kompas.com/otomotif/daihatsukumpulsahabatbekasi/images/activity-1-m.png?v=3"
                     alt="image description">
             </div>
-
+            <center>
+                <h1 class="my-5">On Development</h1>
+            </center>
             <div class="flex flex-wrap md:flex-auto w-full">
                 <div class="w-3/3 md:w-1/3 p-2">
                     <div class="flex flex-col gap-4 p-3 rounded-xl bg-red-300">

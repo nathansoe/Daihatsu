@@ -34,17 +34,17 @@
                     <li>
                         <a href="#"
                             class="block py-2 pr-4 pl-3 text-black rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
-                            aria-current="page">Home</a>
+                            aria-current="page">Kegiatan</a>
                     </li>
                     <li>
                         <a href="#"
                             class="block py-2 pr-4 pl-3 text-black rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
-                            aria-current="page">Home</a>
+                            aria-current="page">Rundown</a>
                     </li>
                     <li>
                         <a href="#"
                             class="block py-2 pr-4 pl-3 text-black rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
-                            aria-current="page">Home</a>
+                            aria-current="page">Peta</a>
                     </li>
                 </ul>
             </div>
