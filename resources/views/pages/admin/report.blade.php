@@ -12,7 +12,7 @@
             <div>
                 <select id="smallSelect"
                     class="block w-full p-1.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="all" selected>All</option>
+                    <option value="" selected>All</option>
                     <option value="0">Tidak Hadir</option>
                     <option value="1">Hadir</option>
                 </select>
@@ -53,6 +53,9 @@
                     <th scope="col" class="px-6 py-3">
                         Status
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                        Action
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -76,13 +79,19 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
     <script>
-        download = 'all'
+        download = null
+        search = ''
 
         table = $('#example').DataTable({
             "lengthChange": false,
             "searching": false,
             "ajax": {
                 url: "{{ url('report') }}" + "/" + download,
+                type: 'GET',
+                data: function(d) {
+                    d.status = download;
+                    d.search = search;
+                },
                 dataSrc: ""
             },
             "columns": [{
@@ -109,6 +118,22 @@
                 {
                     "data": "kehadiran"
                 },
+                {
+                    "targets": -1,
+                    "data": null,
+                    "mRender": function(row, type, set, meta) {
+                        var button = ''
+                        var status = row.kehadiran === 'HADIR' ? 'Active' : 'Non Active'
+                        var activeBtn =
+                            'statusButton px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800'
+                        var nonActiveBtn =
+                            'statusButton px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'
+                        var classBtn = row.kehadiran === 'HADIR' ? activeBtn : nonActiveBtn
+                        button = '<button type="button" class="' + classBtn + '" data-row-data=' + row.nik +
+                            '>' + status + '</button>'
+                        return button
+                    }
+                }
             ],
         });
 
@@ -151,8 +176,9 @@
             callTable()
         })
 
-        function callTable(status) {
-            var url = "{{ url('report') }}" + "/" + status;
+        function callTable() {
+            var url = "{{ url('report/all') }}";
+            console.log(url)
             table.clear().draw();
             table.ajax.url(url).load();
         }
@@ -161,8 +187,14 @@
             var input = $('#smallSearch').val()
             var status = $('#smallSelect').val()
             download = status
-            console.log(download)
-            callTable(status)
+            search = input
+            callTable()
         })
+
+        $('#example').on('click', '.statusButton', function() {
+            var rowData = $(this).data('row-data')
+            console.log(rowData)
+            alert('Delete clicked for: ' + rowData);
+        });
     </script>
 @endsection

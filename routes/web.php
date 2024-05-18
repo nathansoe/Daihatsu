@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/verifikasiKehadiran/{id}', [AdminController::class, 'verifikasiKehadiran'])->name('verifikasiKehadiran');
     Route::post('/dataKehadiran/{id}', [AdminController::class, 'jsonDataKehadiran'])->name('jsonKehadiran');
     Route::get('/delete/{id}', [AdminController::class, 'destroy'])->name('admin.delete');
-    Route::get('/report/{status}', [AdminController::class, 'filterKehadiran']);
+    Route::get('/report/{status}', [AdminController::class, 'Kehadiran']);
     Route::post('/deleteList', [AdminController::class, 'destroyCheckList'])->name('admin.deleteList');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
