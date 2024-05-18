@@ -14,7 +14,7 @@ Route::get('/hello', function () {
 Route::get('/download-qr/{nik}', [RegisterController::class, 'downloadQr'])->name('download');
 Route::post('/register', [RegisterController::class, 'storeUser']);
 Route::post('/cekRegister', [RegisterController::class, 'cekRegister']);
-// Route::get('/all/filter/{status}', [AdminController::class, 'filterKehadiran'])->name('filter');
+Route::get('/all/filter', [AdminController::class, 'Kehadiran'])->name('filter');
 // Route::get('/export-excel', [AdminController::class, 'exportExcel'])->name('export');
 Route::post('/verifikasiKehadiran/{id}', [AdminController::class, 'verifikasiKehadiran'])->name('verifikasiKehadiran');
 // Route::post('/dataKehadiran/{id}', [AdminController::class, 'jsonDataKehadiran'])->name('jsonKehadiran');

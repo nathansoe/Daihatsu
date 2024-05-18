@@ -23,7 +23,7 @@ class Register extends Model
         nama, email, nik, domisili, jenis_peserta as jenis, jumlah_hadir as jumlah, no_hp,
         case 
         when status = 0 then 'Tidak Hadir'  
-        when status = 1 then 'Hadir' end as kehadiran,  created_at as tanggal_daftar
+        when status = 1 then 'Hadir' end as kehadiran,  created_at as tanggal_daftar, time_arrive as arrive
         from register";
         $hadir = DB::select($query);
         return $hadir;
@@ -34,7 +34,7 @@ class Register extends Model
         nama, email, nik, domisili, jenis_peserta as jenis, jumlah_hadir as jumlah, no_hp,
         case 
         when status = 0 then 'Tidak Hadir'  
-        when status = 1 then 'Hadir' end as kehadiran,  created_at as tanggal_daftar
+        when status = 1 then 'Hadir' end as kehadiran,  created_at as tanggal_daftar, time_arrive as arrive
         from register WHERE status = 1" ;
         $hadir = DB::select($query);
         return $hadir;
@@ -44,7 +44,7 @@ class Register extends Model
         nama, email, nik, domisili, jenis_peserta as jenis, jumlah_hadir as jumlah, no_hp,
         case 
         when status = 0 then 'Tidak Hadir'  
-        when status = 1 then 'Hadir' end as kehadiran,  created_at as tanggal_daftar
+        when status = 1 then 'Hadir' end as kehadiran,  created_at as tanggal_daftar, time_arrive as arrive
         from register WHERE status = 0";
         $hadir = DB::select($query);
         return $hadir;
