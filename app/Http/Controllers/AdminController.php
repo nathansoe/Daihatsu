@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Register;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Http\Resources\PostResource;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -19,20 +20,28 @@ class AdminController extends Controller
         $this->registers = $registers;
     }
 
-    public function filterKehadiran($status){
-        if($status == '0'){
-            $registers = $this->registers->tidakHadir();
+    public function Kehadiran(Request $request){
+        $registers = DB::table('register');
+        
+        if ($request->filled('status') && $request->status != '') {
+            $registers->where('status', $request->status);
         }
-        else if($status == 1){
-            $registers = $this->registers->hadir();
+        
+        if ($request->filled('search')) {
+            $registers->where(function($q) use ($request) {
+                $q->where('nama', 'like', '%' . $request->search . '%')
+                  ->orWhere('nik', 'like', '%' . $request->search . '%');
+            });
+        }
+        $items = $registers
+                    ->select('nama', 'email', 'nik', 'jenis_peserta as jenis', 'jumlah_hadir as jumlah', 'no_hp', DB::raw('case 
+                    when status = 0 then "TIDAK HADIR"  
+                    when status = 1 then "HADIR" end as kehadiran'),  'created_at as tanggal_daftar', 'time_arrive as arrive')
+                    ->get();
 
-        }else {
-            $registers = $this->registers->allKehadiran();
-        }
-        // dd($registers);
-        return response()->json($registers);
-        // return view('pages.admin.report', ['users' => $registers]);
+        return response()->json($items);
     }
+
 
     public function exportExcel(Request $request){
         $status = $request->query('status');
@@ -60,6 +69,7 @@ class AdminController extends Controller
         $sheet->setCellValue('G1', 'JENIS PESERTA');
         $sheet->setCellValue('H1', 'KEHADIRAN');
         $sheet->setCellValue('I1', 'TANGGAL DAFTAR');
+        $sheet->setCellValue('J1', 'TANGGAL DATANG');
 
         $row = 2;
         foreach ($registers as $item) {
@@ -72,6 +82,7 @@ class AdminController extends Controller
             $sheet->setCellValue('G'. $row , $item->jenis);
             $sheet->setCellValue('H'. $row , $item->kehadiran);
             $sheet->setCellValue('I'. $row , $item->tanggal_daftar);
+            $sheet->setCellValue('J'. $row , $item->arrive);
 
             $row++;
         }
