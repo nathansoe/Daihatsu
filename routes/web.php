@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/all/filter/{status}', [AdminController::class, 'filterKehadiran'])->name('filter');
+    Route::get('/all/filter/{status}', [AdminController::class, 'Kehadiran'])->name('filter');
     Route::get('/export-excel', [AdminController::class, 'exportExcel'])->name('export');
     Route::post('/verifikasiKehadiran/{id}', [AdminController::class, 'verifikasiKehadiran'])->name('verifikasiKehadiran');
     Route::post('/dataKehadiran/{id}', [AdminController::class, 'jsonDataKehadiran'])->name('jsonKehadiran');
