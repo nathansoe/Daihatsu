@@ -146,8 +146,7 @@ class AdminController extends Controller
 
     public function destroyCheckList(Request $request){
         $nik_checklist = $request->input('nik');
-        Register::whereIn('nik', $nik_checklist)->delete();
+        Register::where('nik', $nik_checklist)->delete();
         return redirect()->back()->with('success', 'Data Register Terhapus!');
-
     }
 }

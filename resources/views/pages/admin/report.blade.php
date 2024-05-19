@@ -73,7 +73,7 @@
 
 @section('script')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.7/css/dataTables.tailwindcss.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
@@ -123,7 +123,7 @@
                     "data": null,
                     "mRender": function(row, type, set, meta) {
                         var button = ''
-                        var status = row.kehadiran === 'HADIR' ? 'Active' : 'Non Active'
+                        var status = 'Delete'
                         var activeBtn =
                             'statusButton px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800'
                         var nonActiveBtn =
@@ -193,8 +193,43 @@
 
         $('#example').on('click', '.statusButton', function() {
             var rowData = $(this).data('row-data')
-            console.log(rowData)
-            alert('Delete clicked for: ' + rowData);
+            Swal.fire({
+                title: "Delete Guest!",
+                text: "Are you sure for delete this guest?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Confirm",
+                closeOnConfirm: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    console.log('Confirmed');
+                    deleteGuest(rowData)
+                } else if (result.isDenied) {
+                    console.log('Canceled');
+                }
+            })
         });
+
+        function deleteGuest(nik){
+            const csrfToken = "{{ csrf_token() }}"
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ url('deleteList') }}",
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                data:{
+                    'nik': nik
+                },
+                success: function(response) {
+                    console.log(response)
+                    callTable()
+                },
+                error: function(xhr, status, error) {
+                    console.log(error)
+                }
+            });
+        }
     </script>
 @endsection

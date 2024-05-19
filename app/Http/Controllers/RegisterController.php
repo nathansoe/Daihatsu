@@ -55,7 +55,7 @@ class RegisterController extends Controller
             $showValue = [
                 'nik' => $request->nik,
                 'nama' => $request->nama,
-                'link_qrcode' => asset('storage/'.$register->link)
+                'link_qrcode' => asset('storage/'.$register->link_qrcode)
             ];
 
             return response()->json($showValue, 200);

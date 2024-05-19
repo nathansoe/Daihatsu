@@ -69,8 +69,6 @@
         var camera = document.getElementById("camera").value;
         const html5QrCode = new Html5Qrcode("preview");
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-            console.log(decodedText)
-            console.log(csrfToken)
             $.ajax({
                 type: 'POST',
                 url: "{{ url('dataKehadiran') }}/" + decodedText,
