@@ -196,8 +196,6 @@
                 url: $(this).attr('action'),
                 data: formData,
                 success: function(response) {
-                    console.log(response.data.email)
-                    console.log(response.data.link_qrcode)
                     nik_id = response.data.nik
                     $('#barcodeResult').attr('src', response.data.link_qrcode);
                     $('#containerBarcode').show();

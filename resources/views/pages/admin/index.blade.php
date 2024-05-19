@@ -57,6 +57,7 @@
 @section('script')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         window.onload = function() {
             startCamera();
@@ -139,6 +140,12 @@
                     'X-CSRF-TOKEN': csrfToken
                 },
                 success: function(response) {
+                    Swal.fire({
+                        title: 'Sukses',
+                        text: 'Data Berhasil di Verifikasi',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
                     $('#verify').hide()
                 },
                 error: function(xhr, status, error) {
