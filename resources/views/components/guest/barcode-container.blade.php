@@ -7,7 +7,7 @@
         </button>
     </div>
     <center>
-        <img class="h-auto max-w-full" id="barcodeResult" src="{{ asset('storage/img/qr-code/img-1.png') }}"
+        <img class="h-auto max-w-full" id="barcodeResult" src="#"
             alt="image description">
     </center>
 </div>

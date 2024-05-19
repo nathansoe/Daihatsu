@@ -23,8 +23,7 @@
             <div class="mb-5 hidden" id="containerBarcodeRegister">
                 <center>
                     <p class="text-xl font-semibold my-3">Your Barcode</p>
-                    <img class="h-auto max-w-full" id="barcodeResultRegister" src="{{ asset('storage/img/qr-code/img-1.png') ?? '#' }}"
-                        alt="image description">
+                    <img class="h-auto max-w-full" id="barcodeResultRegister" src="{{ asset('storage/img/qr-code/img-1.png') ?? '#' }}" alt="image description">
                 </center>
                 <div class="flex w-full justify-center my-2">
                     <button type="button"
