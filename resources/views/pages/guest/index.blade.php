@@ -19,10 +19,10 @@
                         Yuk, seru-seruan bareng bersama Sahabat Daihatsu di Bekasi!
                     </p>
                     <p class="text-xl text-white hidden md:block">
-                        Minggu, 28 April 2024 <span class="text-[#FBB41D] font-bold">|</span> Pukul: 07.00 - selesai
+                        Minggu, 02 Juni 2024 <span class="text-[#FBB41D] font-bold">|</span> Pukul: 07.00 - selesai
                     </p>
                     <p class="text-xl text-center font-semibold text-white block md:hidden">
-                        Minggu, 28 April 2024
+                        Minggu, 02 Juni 2024
                         <br>
                         <span class="text-sm font-normal">Pukul: 07.00 - selesai</span>
                     </p>
@@ -45,17 +45,22 @@
             </div>
             {{-- Section 2 --}}
             <div class="bg-[#2664BC] rounded-3xl p-3">
-                <img class="h-full w-full hidden md:block"
-                    src="https://www.kompas.com/otomotif/daihatsukumpulsahabatbekasi/images/activity-1-d.png?v=3"
+                <img class="h-full w-full hidden md:block rounded-3xl" src="{{ asset('img/ks2.png') }}"
                     alt="image description">
-                <img class="h-full w-full block md:hidden"
-                    src="https://www.kompas.com/otomotif/daihatsukumpulsahabatbekasi/images/activity-1-m.png?v=3"
+                <img class="h-full w-full block md:hidden rounded-3xl" src="{{ asset('img/ks2.png') }}"
+                    alt="image description">
+            </div>
+
+            <div class="bg-[#2664BC] rounded-3xl p-3">
+                <img class="h-full w-full hidden md:block rounded-3xl" src="{{ asset('img/ks1.png') }}"
+                    alt="image description">
+                <img class="h-full w-full block md:hidden rounded-3xl" src="{{ asset('img/ks1.png') }}"
                     alt="image description">
             </div>
 
             <div class="my-4">
                 <div class="flex flex-wrap md:flex-auto w-full">
-                    <div class="w-3/3 md:w-1/3 p-2">
+                    <div class="w-3/3 md:w-1/3 p-2 w-full">
                         <div class="flex flex-col gap-2 p-3 rounded-xl bg-red-400 h-full">
                             <div class="flex justify-between items-center">
                                 <p class="text-normal md:text-xl text-white font-semibold">Sahabat Sehat</p>
@@ -91,14 +96,13 @@
                         </div>
                     </div>
                     <div class="w-full p-2">
-                        <div class="flex gap-3 bg-[#FBB41D] p-5 rounded-xl justify-between items-center">
-                            <div class="flex flex-col gap-3">
+                        <div class="flex flex-wrap gap-3 md:gap-0 bg-[#FBB41D] p-5 rounded-xl justify-between items-center">
+                            <div class="flex flex-col gap-3 w-11/12 items-center md:w-1/5">
                                 <p class="text-normal md:text-xl text-black font-semibold">Sahabat Bertantangan</p>
-                                <a href="" class="text-xs underline">selengkapnya</a>
                             </div>
-                            <div>
+                            <div class="w-1/1 md:w-1/5">
                                 <ul
-                                    class="text-sm md:text-md max-w-md space-y-1 font-semibold text-black list-disc list-inside dark:text-gray-400">
+                                    class="text-xs md:text-md max-w-md space-y-1 font-semibold text-black list-disc list-inside dark:text-gray-400">
                                     <li>
                                         Serbu Belanja di Bazaar Bagasi
                                     </li>
@@ -107,9 +111,9 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div>
+                            <div class="w-1/1 md:w-1/5">
                                 <ul
-                                    class="text-sm md:text-md max-w-md font-semibold space-y-1 text-black list-disc list-inside dark:text-gray-400">
+                                    class="text-xs md:text-md max-w-md space-y-1 font-semibold text-black list-disc list-inside dark:text-gray-400">
                                     <li>
                                         Serbu Belanja di Bazaar Bagasi
                                     </li>
@@ -118,9 +122,9 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div>
+                            <div class="w-1/1 md:w-1/5">
                                 <ul
-                                    class="text-sm md:text-md max-w-md space-y-1 font-semibold text-black list-disc list-inside dark:text-gray-400">
+                                    class="text-xs md:text-md max-w-md space-y-1 font-semibold text-black list-disc list-inside dark:text-gray-400">
                                     <li>
                                         Serbu Belanja di Bazaar Bagasi
                                     </li>
@@ -129,8 +133,8 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div>
-                                <i class="fa-solid fa-medal fa-2xl"></i>
+                            <div class="w-1/7 md:flex justify-center hidden">
+                                <i class="fa-solid fa-medal fa-xl opacity-50"></i>
                             </div>
                         </div>
                     </div>
@@ -139,15 +143,15 @@
             {{-- Section 3 --}}
 
             {{-- Section 4 --}}
-            <x-guest.event-table/>
+            {{-- <x-guest.event-table/> --}}
             {{-- Section 4 --}}
 
             {{-- Section 5 --}}
-            <div class="w-full my-4" id="peta">
+            {{-- <div class="w-full my-4" id="peta">
                 <img class="h-auto max-w-full rounded-lg"
                     src="https://www.kompas.com/otomotif/daihatsukumpulsahabatbekasi/images/map.png?v=2"
                     alt="image description">
-            </div>
+            </div> --}}
             {{-- Section 5 --}}
         </div>
     </section>
@@ -156,6 +160,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         var nik_id = 1
+        var phone = 1
 
         $('#register').on('submit', function(event) {
             event.preventDefault();
@@ -167,6 +172,7 @@
                 success: function(response) {
                     console.log(response)
                     nik_id = response.nik
+                    phone = response.no_hp
                     $('#barcodeResultRegister').attr('src', response.link_qrcode);
                     $('#containerBarcodeRegister').show();
                     Swal.fire({
@@ -196,7 +202,9 @@
                 url: $(this).attr('action'),
                 data: formData,
                 success: function(response) {
+                    console.log(response)
                     nik_id = response.data.nik
+                    phone = response.data.no_hp
                     $('#barcodeResult').attr('src', response.data.link_qrcode);
                     $('#containerBarcode').show();
                 },
@@ -213,12 +221,12 @@
         });
 
         $('#barcodeDownload').on('click', function(event) {
-            downloadQr(nik_id)
+            window.location.href = '{{ url('/barcode/') }}/'+nik_id+'/'+phone;
         })
 
         $('#barcodeDownloadRegister').on('click', function(event) {
-            downloadQr(nik_id)
-        })
+            window.location.href = '{{ url('/barcode/') }}/'+nik_id+'/'+phone;
+        });
 
         function downloadQr(nik) {
             window.location.href = '{{ url('/download-qr/') }}/' + nik;

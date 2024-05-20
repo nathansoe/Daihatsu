@@ -11,6 +11,10 @@ Route::get('/', function(){
     return view('pages/guest/index');
 })->name('user.page');
 
+Route::get('/barcode/{nik}/{phone}', function($nik, $phone){
+    return view('pages/guest/barcode', ['nik' => $nik, 'phone' => $phone]);
+});
+
 Route::post('/registerUser', [RegisterController::class, 'storeUser']);
 Route::post('/cekRegister', [RegisterController::class, 'cekRegister']);
 Route::get('/download-qr/{nik}', [RegisterController::class, 'downloadQr'])->name('download');

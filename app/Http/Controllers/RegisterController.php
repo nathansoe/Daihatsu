@@ -55,6 +55,7 @@ class RegisterController extends Controller
             $showValue = [
                 'nik' => $request->nik,
                 'nama' => $request->nama,
+                'no_hp' => $request->no_hp,
                 'link_qrcode' => asset('storage/'.$register->link_qrcode)
             ];
 
@@ -88,6 +89,7 @@ class RegisterController extends Controller
             'nama' => $data->nama,
             'nik' => $data->nik,
             'email' => $data->email,
+            'no_hp' => $data->no_hp,
             'link_qrcode' => asset('storage/'.$data->link_qrcode)
         ];
 
