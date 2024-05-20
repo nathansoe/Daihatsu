@@ -22,7 +22,7 @@
                     <p class="text-xl">Nomor Induk Kependudukan</p>
                     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400" id="nikPrev"></p>
                     <p class="text-xl mt-4">Nomor Telefon</p>
-                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400" id="noPrev"></p>
+                   <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400" id="noPrev"></p>
                 </div>
                 <!-- Modal footer -->
                 <div class="flex w-full justify-center py-5">
