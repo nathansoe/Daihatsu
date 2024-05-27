@@ -5,20 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Print Component</title>
+    <title>Print Barcode</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+                padding: 10px;
+                page-break-inside: avoid;
+            }
+
+            .print-hide{
+                display: none
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="w-full h-full flex justify-center">
-        <div id="registerPrintBarcode" style="position: relative">
-            <img class="h-[500px] max-w-full" src="{{ asset('img/barcode_parent.png') }}" alt="barcode">
-            <img src="#" id="barcodeResultRegister"
-                style="position: absolute; top:37%; left: 28%" class="h-[130px] max-w-full" alt="result">
-        </div>
+    <div class="w-full flex justify-center my-4 print-hide">
+        <button onclick="window.print()" type="button"
+            class="text-white text-md bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-4 py-2.5 me-3 mb-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Print
+            / Save</button>
     </div>
-    <div class="w-full flex justify-center my-4">
-        <button onclick="window.print()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Print / Save</button>
+    <div class="w-full min-h-screen flex justify-center items-start">
+        <div id="registerPrintBarcode" style="position: relative; width: auto">
+            <img class="h-[50vh] max-w-full" src="{{ asset('img/barcode_parent.png') }}" alt="barcode">
+            <img src="#" id="barcodeResultRegister" style="position: absolute; top:40%; left: 28%"
+                class="h-[12vh] max-w-full" alt="result">
+        </div>
     </div>
 </body>
 
