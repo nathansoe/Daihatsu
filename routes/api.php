@@ -6,11 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/hello', function () {
-    return 'Hello World';
-})->name('user.page');
-
-
 Route::get('/download-qr/{nik}', [RegisterController::class, 'downloadQr'])->name('download');
 Route::post('/register', [RegisterController::class, 'storeUser']);
 Route::post('/cekRegister', [RegisterController::class, 'cekRegister']);
