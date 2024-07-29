@@ -24,7 +24,6 @@
             @page {
                 size: A4;
                 margin: 0;
-                padding: 10px;
                 page-break-inside: avoid;
             }
             img.barcode {
@@ -59,7 +58,7 @@
     <div class="w-full h-full flex justify-center items-center">
         <div id="registerPrintBarcode" style="position: relative;">
             <img class="barcode w-full h-full object-cover" src="{{ asset('img/barcode_parent.png') }}" alt="barcode">
-            <img src="#" id="barcodeResultRegister" class="h-[130px] md:h-[360px] lg:h-[480px] max-w-full absolute top-[12%] md:top-[36%] left-[28%] lg:left-[34%]" alt="result">
+            <img src="#" id="barcodeResultRegister" class="h-[130px] md:h-[360px] lg:h-[480px] max-w-full absolute top-0 left-[28%] lg:left-[34%]" alt="result">
         </div>
     </div>
 
