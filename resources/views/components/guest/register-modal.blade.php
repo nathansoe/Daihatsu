@@ -23,9 +23,10 @@
             <div class="mb-5 hidden" id="containerBarcodeRegister">
                 <center>
                     <p class="text-xl font-semibold my-3">Your Barcode</p>
-                    <div class="w-auto" id="registerPrintBarcode" style="position: relative">
-                        <img class="h-[500px] max-w-full" src="{{asset('img/barcode_parent.png')}}" alt="barcode">
-                        <img src="#" id="barcodeResultRegister" style="position: absolute; top:37%; left: 37%" class="h-[130px] max-w-full" alt="result">
+                    <div class="w-auto relative" id="registerPrintBarcode">
+                        <!-- <img class="h-[500px] max-w-full" src="{{asset('img/barcode_parent.png')}}" alt="barcode"> -->
+                        <img class="barcode w-full h-full object-cover" src="{{ asset('img/barcode_parent.png') }}" alt="barcode">
+                        <img src="#" id="barcodeResultRegister" class="h-[130px] md:h-[360px] lg:h-[480px] max-w-full absolute top-[36%] left-[28%] lg:left-[34%]" alt="result">
                     </div>
                 </center>
                 <div class="flex w-full justify-center my-2">
