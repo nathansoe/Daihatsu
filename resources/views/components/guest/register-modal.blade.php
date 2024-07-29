@@ -28,11 +28,9 @@
                         <img src="#" id="barcodeResultRegister" class="h-[130px] md:h-[360px] lg:h-[480px] max-w-full absolute top-[0%] left-[28%] lg:left-[34%]" alt="result">
                     </div>
                 </center> -->
-                <div class="w-full h-full flex justify-center items-center">
-                    <div id="registerPrintBarcode" class="relative">
-                        <img class="barcode w-full h-full object-cover" src="{{ asset('img/barcode_parent.png') }}" alt="barcode">
-                        <img src="#" id="barcodeResultRegister" class="h-[130px] md:h-[360px] lg:h-[480px] max-w-full absolute top-[36%] left-[28%] lg:left-[34%]" alt="result">
-                    </div>
+                <div id="registerPrintBarcode" class="relative">
+                    <img class="barcode w-full h-full object-cover" src="{{ asset('img/barcode_parent.png') }}" alt="barcode">
+                    <img src="#" id="barcodeResultRegister" class="h-[130px] md:h-[360px] lg:h-[480px] max-w-full absolute top-[36%] left-[28%] lg:left-[34%]" alt="result">
                 </div>
                 <div class="flex w-full justify-center my-2">
                     <button type="button"
