@@ -21,14 +21,19 @@
             </div>
             <!-- Modal body -->
             <div class="mb-5 hidden" id="containerBarcodeRegister">
-                <center>
+                <!-- <center>
                     <p class="text-xl font-semibold my-3">Your Barcode</p>
                     <div class="w-auto relative" id="registerPrintBarcode">
-                        <!-- <img class="h-[500px] max-w-full" src="{{asset('img/barcode_parent.png')}}" alt="barcode"> -->
-                        <img class="barcode w-full h-full object-cover" src="{{ asset('img/barcode_parent.png') }}" alt="barcode">
+                        <img class="h-[500px] max-w-full" src="{{asset('img/barcode_parent.png')}}" alt="barcode">
                         <img src="#" id="barcodeResultRegister" class="h-[130px] md:h-[360px] lg:h-[480px] max-w-full absolute top-[0%] left-[28%] lg:left-[34%]" alt="result">
                     </div>
-                </center>
+                </center> -->
+                <div class="w-full h-full flex justify-center items-center">
+                    <div id="registerPrintBarcode" class="relative">
+                        <img class="barcode w-full h-full object-cover" src="{{ asset('img/barcode_parent.png') }}" alt="barcode">
+                        <img src="#" id="barcodeResultRegister" class="h-[130px] md:h-[360px] lg:h-[480px] max-w-full absolute top-[36%] left-[28%] lg:left-[34%]" alt="result">
+                    </div>
+                </div>
                 <div class="flex w-full justify-center my-2">
                     <button type="button"
                         id="barcodeDownloadRegister"
