@@ -58,7 +58,7 @@
     <div class="w-full h-full flex justify-center items-center">
         <div id="registerPrintBarcode" class="relative">
             <img class="barcode w-full h-full object-cover" src="{{ asset('img/barcode_parent.png') }}" alt="barcode">
-            <img src="#" id="barcodeResultRegister" class="h-[160px] md:h-[360px] lg:h-[480px] max-w-full absolute top-[36%] left-[34%]" alt="result">
+            <img src="#" id="barcodeResultRegister" class="h-[160px] md:h-[360px] lg:h-[480px] max-w-full absolute top-[36%] left-[30%] md:left-[34%]" alt="result">
         </div>
     </div>
 
